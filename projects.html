@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Yves-Claude Zamor | Projects & Work Samples</title>
+  <style>
+    /* Simple styling to match index.html and resume.html */
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    nav { background-color: #003366; padding: 10px; }
+    nav a { color: white; margin-right: 10px; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    .container { max-width: 600px; margin: 20px auto; }
+    .project { margin-bottom: 30px; }
+    .project a { color: #003366; font-weight: bold; text-decoration: none; }
+    .project a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION MENU (must match your other pages exactly) -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="resume.html">Resume</a>
+    <a href="projects.html">Projects</a>
+    <a href="certifications.html">Certifications</a>  <!-- If you made certifications.html -->
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <h1>Projects & Work Samples</h1>
+
+    <!-- PROJECT #1 -->
+    <div class="project">
+      <h2>Python Vulnerability Scanner</h2>
+      <p>
+        Developed a Python tool that parses the National Vulnerability Database (NVD) JSON feed 
+        and matches known CVEs against installed packages. Generates a prioritized CSV report 
+        for remediation.
+      </p>
+      <p>
+        <a href="https://github.com/yveszamor/python-vuln-scanner" target="_blank">
+          View code on GitHub
+        </a>
+      </p>
+    </div>
+
+    <!-- PROJECT #2 -->
+    <div class="project">
+      <h2>VirtualBox + Kali Linux Home Lab</h2>
+      <p>
+        Built a multi-VM Kali Linux environment on a Mac Mini 2008 using VirtualBox. Documented 
+        each installation step (host OS, VirtualBox settings, VM configuration, networking) 
+        in a 12-page PDF guide with screenshots.
+      </p>
+      <p>
+        <a href="Kali_Linux_Lab_Guide.pdf" target="_blank">
+          Download Lab Guide (PDF)
+        </a>
+      </p>
+    </div>
+
+    <!-- PROJECT #3 -->
+    <div class="project">
+      <h2>Network Sniffing with Wireshark</h2>
+      <p>
+        Captured and analyzed live network traffic on a SOHO router. Filtered for HTTP, DNS, and 
+        suspicious TCP sessions. Produced a 5-page analysis report highlighting potential 
+        security issues and suggested mitigations.
+      </p>
+      <p>
+        <a href="Wireshark_Report.pdf" target="_blank">
+          Download Report (PDF)
+        </a>
+      </p>
+    </div>
+
+    <!-- (Optional) Add more project blocks the same way -->
+
+  </div>
+
+</body>
+</html>
