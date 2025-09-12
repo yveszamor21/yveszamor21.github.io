@@ -1,63 +1,638 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yves-Claude Zamor - Cybersecurity Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yves‑Claude Zamor — Cybersecurity Portfolio</title>
+  <meta name="description" content="Portfolio of Yves‑Claude Zamor — aspiring SOC Analyst. Hands‑on cybersecurity labs, projects, and certifications." />
+  <meta name="author" content="Yves‑Claude Zamor" />
+  <meta property="og:title" content="Yves‑Claude Zamor — Cybersecurity Portfolio" />
+  <meta property="og:description" content="Hands‑on cybersecurity labs, projects, and certifications." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <!-- Optional canonical: set to your deployed URL -->
+  <!-- <link rel="canonical" href="https://yveszamor21.github.io/" /> -->
+
+  <!-- Your external stylesheet (keep if you already use it) -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Inline critical styles to ensure a professional look even without style.css -->
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #111825;
+      --text: #e6edf3;
+      --muted: #9fb3c8;
+      --brand: #4fb3ff;
+      --accent: #a78bfa;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+      --maxw: 1100px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 1rem; }
+    /* Skip link */
+    .skip-link { position: absolute; left: -999px; top: -999px; background: #fff; color: #000; padding: .5rem .75rem; border-radius: 6px; }
+    .skip-link:focus { left: .75rem; top: .75rem; z-index: 1000; }
+
+    /* Navbar */
+    header.navbar { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px); background: rgba(11,15,20,.7); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .nav-container { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem 1rem; }
+    .nav-brand h1 { font-size: 1.125rem; margin: 0; letter-spacing: .5px; }
+    .nav-menu { list-style: none; display: flex; gap: .75rem; margin: 0; padding: 0; }
+    .nav-link { display: inline-flex; padding: .5rem .75rem; border-radius: 999px; transition: background .2s ease; }
+    .nav-link:hover { background: rgba(255,255,255,.06); }
+    .nav-link[aria-current="page"] { background: rgba(79,179,255,.12); outline: 1px solid rgba(79,179,255,.35); }
+    .hamburger { display: none; background: transparent; border: 0; padding: .5rem; border-radius: 8px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; }
+
+    /* Hero */
+    .hero { padding: 3rem 0 2rem; display: grid; gap: 1.25rem; }
+    .hero-name { font-size: clamp(1.75rem, 3vw, 2.25rem); margin: 0; }
+    .hero-tagline { margin: 0; font-weight: 600; color: var(--muted); }
+    .education-info { margin: .25rem 0 0; color: var(--muted); }
+    .hero-cta { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: .75rem; }
+    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .6rem .9rem; border-radius: 10px; border: 1px solid rgba(255,255,255,.12); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); color: var(--text); box-shadow: var(--shadow); text-decoration: none; }
+    .btn:hover { transform: translateY(-1px); }
+
+    /* Sections */
+    section.section { margin: 2rem 0; }
+    .section-heading { font-size: 1.25rem; margin: 0 0 .75rem; }
+    .muted { color: var(--muted); }
+
+    /* Cards grid */
+    .grid { display: grid; gap: 1rem; }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width: 900px) { .grid.cols-3 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 640px) { .nav-menu { display: none; } .hamburger { display: inline-block; } .grid.cols-3 { grid-template-columns: 1fr; } }
+
+    .card { background: var(--card); border: 1px solid rgba(255,255,255,.06); border-radius: var(--radius); padding: 1rem; box-shadow: var(--shadow); height: 100%; display: flex; flex-direction: column; }
+    .card h3 { margin: 0 0 .35rem; font-size: 1.05rem; }
+    .card p { margin: 0 0 .75rem; color: var(--muted); }
+    .card .tags { margin-top: auto; display: flex; flex-wrap: wrap; gap: .5rem; }
+    .tag { font-size: .8rem; padding: .25rem .5rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); color: var(--muted); }
+
+    footer { border-top: 1px solid rgba(255,255,255,.06); margin-top: 3rem; padding: 1.5rem 0; color: var(--muted); }
+    .nav-menu.is-open{display:flex !important; flex-direction:column;}
+  </style>
 </head>
 <body>
-    <!-- Navigation Header -->
-    <header class="navbar">
-        <nav class="nav-container">
-            <div class="nav-brand">
-                <h1>Yves-Claude Zamor</h1>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link active">Home</a></li>
-                <li><a href="resume.html" class="nav-link">Resume</a></li>
-                <li><a href="projects.html" class="nav-link">Projects</a></li>
-                <li><a href="certifications.html" class="nav-link">Certifications</a></li>
-            </ul>
-            <!-- Mobile menu toggle -->
-            <button class="hamburger" aria-label="Toggle navigation menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </nav>
-    </header>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <!-- Hero Section -->
-            <section class="hero-section">
-                <h1 class="hero-name">Yves-Claude Zamor</h1>
-                <h2 class="hero-tagline">Aspiring Cybersecurity Analyst</h2>
-                <p class="education-info">Associate of Science in Cybersecurity & Networking (GPA 3.89) – DeVry University, June 2025</p>
-            </section>
+  <!-- Navigation Header -->
+  <header class="navbar" role="banner">
+    <nav class="nav-container" aria-label="Primary navigation">
+      <div class="nav-brand">
+        <h1>Yves‑Claude Zamor</h1>
+      </div>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link" aria-current="page">Home</a></li>
+        <li><a href="resume.html" class="nav-link">Resume</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="certifications.html" class="nav-link">Certifications</a></li>
+      </ul>
+      <button class="hamburger" aria-label="Toggle navigation menu" aria-controls="nav-menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
 
-            <!-- Mission Statement Section -->
-            <section class="section">
-                <h2 class="section-heading">Mission Statement</h2>
-                <p class="mission-text">
-                    Dedicated to strengthening small-business networks by proactively identifying vulnerabilities and providing clear, user-friendly documentation. Fluent in English, French, Haitian Kreyol, and Spanish. I combine strong technical skills with effective communication to deliver comprehensive cybersecurity solutions.
-                </p>
-            </section>
-
-            <!-- Cybersecurity Labs Section -->
-            <section class="section">
-                <h2 class="section-heading">Cybersecurity Labs</h2>
-                <ul>
-                    <li><a href="https://github.com/yveszamor21/cyber-labs-portfolio/tree/main/Lab1">Lab 1: Network Security Fundamentals</a></li>
-                    <li><a href="https://github.com/yveszamor21/cyber-labs-portfolio/tree/main/Lab2">Lab 2: Vulnerability Assessment</a></li>
-                    <li><a href="https://github.com/yveszamor21/cyber-labs-portfolio/tree/main/Lab3">Lab 3: Incident Response Planning</a></li>
-                    <li><a href="https://github.com/yveszamor21/cyber-labs-portfolio/tree/main/Lab4">Lab 4: Digital Forensics Investigation</a></li>
-                    <li><a href="https://github.com/yveszamor21/cyber-labs-portfolio/tree/main/Lab5">Lab 5: Penetration Testing Basics</a></li>
-                </ul>
-            </section>
+  <!-- Main Content -->
+  <main id="main" class="main-content" role="main">
+    <div class="container">
+      <!-- Hero Section -->
+      <section class="hero" aria-labelledby="intro">
+        <h1 id="intro" class="hero-name">Yves‑Claude Zamor</h1>
+        <p class="hero-tagline">Aspiring SOC / Cybersecurity Analyst</p>
+        <p class="education-info">Associate of Science in Cybersecurity & Networking (GPA 3.89) — DeVry University, <strong>completed Apr 2025</strong>. Currently pursuing Bachelor's (expected <strong>Mar 2026</strong>).</p>
+        <div class="hero-cta">
+          <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Download Resume (PDF)</a>
+          <a class="btn" href="https://github.com/yveszamor21" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="projects.html">View Projects</a>
+        
+          <a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View All Labs on GitHub →</a>
         </div>
-    </main>
+      </section>
+
+      <!-- Mission Statement Section -->
+      <section class="section" aria-labelledby="mission">
+        <h2 id="mission" class="section-heading">Mission Statement</h2>
+        <p class="muted">I help small businesses harden their networks by identifying vulnerabilities, writing clear remediation steps, and validating fixes with evidence. Trilingual (English, French, Haitian Kreyòl) with beginner Spanish; I combine hands‑on technical skills and plain‑language communication to deliver practical security outcomes.</p>
+      </section>
+
+      <!-- Skills Snapshot -->
+      <section class="section" aria-labelledby="skills">
+        <h2 id="skills" class="section-heading">Skills Snapshot</h2>
+        <div class="grid cols-3">
+          <div class="card">
+            <h3>Blue Team & Monitoring</h3>
+            <p>Security Onion • Zeek • Wireshark • Splunk basics</p>
+            <div class="tags"><span class="tag">SOC</span><span class="tag">PCAP</span><span class="tag">Logs</span></div>
+          </div>
+          <div class="card">
+            <h3>Networking & DNS</h3>
+            <p>BIND9 • dnsmasq • Pi‑hole • TCP/IP • Subnetting</p>
+            <div class="tags"><span class="tag">DNS</span><span class="tag">OSI</span><span class="tag">Linux</span></div>
+          </div>
+          <div class="card">
+            <h3>Offensive Basics</h3>
+            <p>Nmap • DVWA • Basic web vulns (XSS, SQLi) — lab‑only</p>
+            <div class="tags"><span class="tag">Red Team</span><span class="tag">Ethical</span><span class="tag">Labs</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cybersecurity Labs Section -->
+      <section class="section" aria-labelledby="labs">
+        <h2 id="labs" class="section-heading">Cybersecurity Labs</h2>
+        <p class="muted">Each lab includes objectives, setup, commands, screenshots/evidence, and troubleshooting notes.</p>
+        <div class="grid cols-3" role="list">
+          <article class="card" role="listitem">
+            <h3><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">Lab 1 — Network Security Fundamentals</a></h3>
+            <p>Configure a secure small‑office network baseline and document controls.</p>
+            <div class="tags"><span class="tag">Baseline</span><span class="tag">SOHO</span></div>
+          </article>
+          <article class="card" role="listitem">
+            <h3><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">Lab 2 — Vulnerability Assessment</a></h3>
+            <p>Run a safe vuln scan, analyze findings, and prioritize remediation.</p>
+            <div class="tags"><span class="tag">Scanning</span><span class="tag">Risk</span></div>
+          </article>
+          <article class="card" role="listitem">
+            <h3><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">Lab 3 — Incident Response Planning</a></h3>
+            <p>Create an IR checklist, escalation matrix, and tabletop scenario.</p>
+            <div class="tags"><span class="tag">IR</span><span class="tag">Playbooks</span></div>
+          </article>
+          <article class="card" role="listitem">
+            <h3><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">Lab 4 — Digital Forensics Investigation</a></h3>
+            <p>Acquire evidence, calculate hashes, and analyze artifacts.</p>
+            <div class="tags"><span class="tag">Forensics</span><span class="tag">Chain of Custody</span></div>
+          </article>
+          <article class="card" role="listitem">
+            <h3><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">Lab 5 — Penetration Testing Basics</a></h3>
+            <p>Scoped recon and safe exploitation on DVWA; document ethics and scope.</p>
+            <div class="tags"><span class="tag">PT</span><span class="tag">DVWA</span></div>
+          </article>
+          <article class="card" role="listitem">
+            <h3><a href="projects.html">More Labs & Projects →</a></h3>
+            <p>DNS (BIND9, Pi‑hole), Wireshark DNS analysis, Security Onion alerting, Nmap host discovery, and more.</p>
+            <div class="tags"><span class="tag">DNS</span><span class="tag">Wireshark</span><span class="tag">SO</span></div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">
+      <p>© <span id="year"></span> Yves‑Claude Zamor • <a href="resume.html">Resume</a> • <a href="certifications.html">Certifications</a> • <a href="https://github.com/yveszamor21" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const btn = document.querySelector('.hamburger');
+    const menu = document.getElementById('nav-menu');
+    btn?.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Mark active link (works when deployed across pages)
+    const links = document.querySelectorAll('.nav-link');
+    links.forEach(l => {
+      const href = l.getAttribute('href');
+      if (href && window.location.pathname.endsWith(href)) {
+        l.setAttribute('aria-current', 'page');
+      }
+    });
+  </script>
 </body>
 </html>
+
+
+<!-- ===== NEXT FILE: projects.html ===== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects — Yves‑Claude Zamor</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* critical styles (same system as index) */
+    :root{--bg:#0b0f14;--card:#111825;--text:#e6edf3;--muted:#9fb3c8;--brand:#4fb3ff;--accent:#a78bfa;--shadow:0 10px 30px rgba(0,0,0,.35);--radius:16px;--maxw:1100px}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial}
+    a{color:var(--brand);text-decoration:none}a:hover{text-decoration:underline}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 1rem}
+    header.navbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background:rgba(11,15,20,.7);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-container{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 1rem}
+    .nav-brand h1{font-size:1.125rem;margin:0}
+    .nav-menu{list-style:none;display:flex;gap:.75rem;margin:0;padding:0}
+    .nav-link{display:inline-flex;padding:.5rem .75rem;border-radius:999px}
+    .nav-link[aria-current="page"]{background:rgba(79,179,255,.12);outline:1px solid rgba(79,179,255,.35)}
+    .hamburger{display:none;background:transparent;border:0;padding:.5rem;border-radius:8px}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0}
+    @media(max-width:640px){.nav-menu{display:none}.hamburger{display:inline-block}.nav-menu.is-open{display:flex;flex-direction:column}}
+    main{padding:2rem 0}
+    h1{margin:0 0 .5rem}
+    p.muted{color:var(--muted)}
+    .grid{display:grid;gap:1rem}
+    .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media(max-width:900px){.grid.cols-3{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:640px){.grid.cols-3{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .card h3{margin:.25rem 0 .5rem}
+    .card p{margin:0 0 .75rem;color:var(--muted)}
+    .tags{margin-top:auto;display:flex;flex-wrap:wrap;gap:.5rem}
+    .tag{font-size:.8rem;padding:.25rem .5rem;border-radius:999px;border:1px solid rgba(255,255,255,.12);color:var(--muted)}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem .85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));color:var(--text);box-shadow:var(--shadow);text-decoration:none}
+    footer{border-top:1px solid rgba(255,255,255,.06);margin-top:3rem;padding:1.5rem 0;color:var(--muted)}
+  </style>
+</head>
+<body>
+<header class="navbar" role="banner">
+  <nav class="nav-container" aria-label="Primary navigation">
+    <div class="nav-brand"><h1>Yves‑Claude Zamor</h1></div>
+    <ul class="nav-menu" id="nav-menu-projects">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="resume.html" class="nav-link">Resume</a></li>
+      <li><a href="projects.html" class="nav-link" aria-current="page">Projects</a></li>
+      <li><a href="certifications.html" class="nav-link">Certifications</a></li>
+      <li><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener" class="nav-link">Labs (GitHub)</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu-projects" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+<main class="container" role="main">
+  <h1>Projects & Labs</h1>
+  <p class="muted">Selected hands‑on work. Each card links to the GitHub repository.</p>
+  <div class="grid cols-3" role="list">
+    <article class="card" role="listitem">
+      <h3>BIND9 Local DNS Resolver</h3>
+      <p>Recursive DNS on Linux with validation and zone checks.</p>
+      <p><a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View on GitHub →</a></p>
+      <div class="tags"><span class="tag">DNS</span><span class="tag">Linux</span></div>
+    </article>
+    <article class="card" role="listitem">
+      <h3>dnsmasq Forwarder</h3>
+      <p>Lightweight caching forwarder; systemd‑resolved integration.</p>
+      <p><a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View on GitHub →</a></p>
+      <div class="tags"><span class="tag">DNS</span><span class="tag">Caching</span></div>
+    </article>
+    <article class="card" role="listitem">
+      <h3>Pi‑hole Ad‑Blocking DNS</h3>
+      <p>Network‑wide blocking with validation and metrics.</p>
+      <p><a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View on GitHub →</a></p>
+      <div class="tags"><span class="tag">DNS</span><span class="tag">Privacy</span></div>
+    </article>
+    <article class="card" role="listitem">
+      <h3>Wireshark DNS Analysis</h3>
+      <p>Filters, cache detection, and evidence exports.</p>
+      <p><a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View on GitHub →</a></p>
+      <div class="tags"><span class="tag">PCAP</span><span class="tag">Analysis</span></div>
+    </article>
+    <article class="card" role="listitem">
+      <h3>Security Onion DNS Alerting</h3>
+      <p>Zeek + Suricata rules; long‑QNAME detections.</p>
+      <p><a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View on GitHub →</a></p>
+      <div class="tags"><span class="tag">SOC</span><span class="tag">Detection</span></div>
+    </article>
+    <article class="card" role="listitem">
+      <h3>Nmap Host Discovery</h3>
+      <p>Safe scanning flags, reports, and ethics.</p>
+      <p><a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View on GitHub →</a></p>
+      <div class="tags"><span class="tag">Recon</span><span class="tag">Reporting</span></div>
+    </article>
+  </div>
+</main>
+<footer role="contentinfo"><div class="container"><p>© <span id="year-p"></span> Yves‑Claude Zamor • <a href="index.html">Home</a></p></div></footer>
+<script>
+  document.getElementById('year-p').textContent = new Date().getFullYear();
+  const btn=document.querySelector('.hamburger');
+  const menu=document.getElementById('nav-menu-projects');
+  btn?.addEventListener('click',()=>{const isOpen=menu.classList.toggle('is-open');btn.setAttribute('aria-expanded',String(isOpen));});
+</script>
+</body>
+</html>
+
+<!-- ===== NEXT FILE: resume.html ===== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resume — Yves‑Claude Zamor</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{--bg:#0b0f14;--card:#111825;--text:#e6edf3;--muted:#9fb3c8;--brand:#4fb3ff;--accent:#a78bfa;--shadow:0 10px 30px rgba(0,0,0,.35);--radius:16px;--maxw:900px}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto}
+    a{color:var(--brand)}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 1rem}
+    header.navbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background:rgba(11,15,20,.7);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-container{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 1rem}
+    .nav-menu{list-style:none;display:flex;gap:.75rem;margin:0;padding:0}
+    .nav-link{display:inline-flex;padding:.5rem .75rem;border-radius:999px}
+    .nav-link[aria-current="page"]{background:rgba(79,179,255,.12);outline:1px solid rgba(79,179,255,.35)}
+    .hamburger{display:none;background:transparent;border:0;padding:.5rem;border-radius:8px}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0}
+    @media(max-width:640px){.nav-menu{display:none}.hamburger{display:inline-block}.nav-menu.is-open{display:flex;flex-direction:column}}
+    main{padding:2rem 0}
+    h1{margin:.5rem 0 1rem}
+    .muted{color:var(--muted)}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);margin-bottom:1rem}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    @media(max-width:800px){.two-col{grid-template-columns:1fr}}
+    ul{margin:.5rem 0 .5rem 1.15rem}
+  </style>
+</head>
+<body>
+<header class="navbar" role="banner">
+  <nav class="nav-container" aria-label="Primary navigation">
+    <div class="nav-brand"><h1>Yves‑Claude Zamor</h1></div>
+    <ul class="nav-menu" id="nav-menu-resume">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="resume.html" class="nav-link" aria-current="page">Resume</a></li>
+      <li><a href="projects.html" class="nav-link">Projects</a></li>
+      <li><a href="certifications.html" class="nav-link">Certifications</a></li>
+      <li><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener" class="nav-link">Labs (GitHub)</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu-resume" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+<main class="container" role="main">
+  <h1>Resume</h1>
+  <div class="card">
+    <p><strong>Target roles:</strong> SOC Analyst I, IT Support → Security, Junior Blue Team</p>
+    <p class="muted">I harden small‑business networks, document findings clearly, and validate fixes with evidence.</p>
+    <p>
+      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Download Resume (PDF)</a>
+      &nbsp;•&nbsp; <a href="https://github.com/yveszamor21" target="_blank" rel="noopener">GitHub</a>
+    </p>
+  </div>
+
+  <div class="two-col">
+    <section class="card">
+      <h2>Education</h2>
+      <p><strong>DeVry University</strong> — Associate of Science, Cybersecurity & Networking, <em>Apr 2025</em> (GPA 3.89)</p>
+      <p><strong>Bachelor’s (continuing)</strong> — Expected <em>Mar 2026</em></p>
+    </section>
+
+    <section class="card">
+      <h2>Core Skills</h2>
+      <ul>
+        <li>Blue Team: Security Onion, Zeek, Wireshark, log triage</li>
+        <li>Networking: TCP/IP, DNS (BIND9, dnsmasq, Pi‑hole), VLANs (lab)</li>
+        <li>Offensive basics (lab only): Nmap, DVWA, OWASP Top‑10 concepts</li>
+        <li>Linux: Debian/Ubuntu, shell scripting, systemd basics</li>
+        <li>Documentation: runbooks, lab reports, evidence capture</li>
+      </ul>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>Academic & Lab Projects</h2>
+    <ul>
+      <li><strong>DNS Resolver Lab</strong> — Built BIND9 recursive resolver with secure defaults; validated via <code>dig</code> and <code>named-check*</code>.</li>
+      <li><strong>Security Onion DNS Alerting</strong> — Detected suspicious long‑QNAME lookups using Zeek logs and Suricata rules.</li>
+      <li><strong>Wireshark PCAP Analysis</strong> — Crafted filters to separate cache hits vs recursion and exported evidence.</li>
+      <li><strong>Nmap Recon</strong> — Safe discovery with rate limits; documented scope and ethics.</li>
+    </ul>
+    <p><a class="btn" href="projects.html">See project details →</a></p>
+  </section>
+
+  <section class="card">
+    <h2>Professional Summary</h2>
+    <ul>
+      <li>Clear communicator (English, French, Haitian Kreyòl; basic Spanish) with customer support mindset.</li>
+      <li>Detail‑oriented: follows change‑control, captures before/after evidence, and writes reproducible steps.</li>
+      <li>Team player: comfortable filing tickets, escalating with context, and documenting incident notes.</li>
+    </ul>
+  </section>
+</main>
+<footer role="contentinfo"><div class="container"><p>© <span id="year-r"></span> Yves‑Claude Zamor • <a href="index.html">Home</a></p></div></footer>
+<script>
+  document.getElementById('year-r').textContent = new Date().getFullYear();
+  const btn=document.querySelector('.hamburger');
+  const menu=document.getElementById('nav-menu-resume');
+  btn?.addEventListener('click',()=>{const isOpen=menu.classList.toggle('is-open');btn.setAttribute('aria-expanded',String(isOpen));});
+</script>
+</body>
+</html>
+
+<!-- ===== NEXT FILE: certifications.html ===== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Certifications — Yves‑Claude Zamor</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{--bg:#0b0f14;--card:#111825;--text:#e6edf3;--muted:#9fb3c8;--brand:#4fb3ff;--accent:#a78bfa;--shadow:0 10px 30px rgba(0,0,0,.35);--radius:16px;--maxw:900px}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto}
+    a{color:var(--brand)}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 1rem}
+    header.navbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background:rgba(11,15,20,.7);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-container{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 1rem}
+    .nav-menu{list-style:none;display:flex;gap:.75rem;margin:0;padding:0}
+    .nav-link{display:inline-flex;padding:.5rem .75rem;border-radius:999px}
+    .nav-link[aria-current="page"]{background:rgba(79,179,255,.12);outline:1px solid rgba(79,179,255,.35)}
+    .hamburger{display:none;background:transparent;border:0;padding:.5rem;border-radius:8px}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0}
+    @media(max-width:640px){.nav-menu{display:none}.hamburger{display:inline-block}.nav-menu.is-open{display:flex;flex-direction:column}}
+    main{padding:2rem 0}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);margin-bottom:1rem}
+    .muted{color:var(--muted)}
+    ul{margin:.5rem 0 .5rem 1.15rem}
+  </style>
+</head>
+<body>
+<header class="navbar" role="banner">
+  <nav class="nav-container" aria-label="Primary navigation">
+    <div class="nav-brand"><h1>Yves‑Claude Zamor</h1></div>
+    <ul class="nav-menu" id="nav-menu-certs">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="resume.html" class="nav-link">Resume</a></li>
+      <li><a href="projects.html" class="nav-link">Projects</a></li>
+      <li><a href="certifications.html" class="nav-link" aria-current="page">Certifications</a></li>
+      <li><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener" class="nav-link">Labs (GitHub)</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu-certs" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+<main class="container" role="main">
+  <h1>Certifications & Credentials</h1>
+  <section class="card">
+    <h2>Academic Credential</h2>
+    <ul>
+      <li><strong>Associate of Science — Cybersecurity & Networking</strong>, DeVry University — <em>Completed Apr 2025</em> (GPA 3.89)</li>
+      <li><strong>Bachelor’s (in progress)</strong> — Expected <em>Mar 2026</em></li>
+    </ul>
+  </section>
+  <section class="card">
+    <h2>Industry Certifications</h2>
+    <ul>
+      <li><strong>CompTIA Security+</strong> — Studying / planning exam (state your target month here).</li>
+    </ul>
+    <p class="muted">Note: I only list certifications that are completed or clearly in progress — no future claims.</p>
+  </section>
+  <section class="card">
+    <h2>Relevant Coursework</h2>
+    <ul>
+      <li>Security Operations fundamentals, Network defense, Linux administration labs</li>
+      <li>Tools: Security Onion, Zeek, Wireshark, Nmap, DVWA (lab), Splunk basics</li>
+    </ul>
+  </section>
+</main>
+<footer role="contentinfo"><div class="container"><p>© <span id="year-c"></span> Yves‑Claude Zamor • <a href="index.html">Home</a></p></div></footer>
+<script>
+  document.getElementById('year-c').textContent = new Date().getFullYear();
+  const btn=document.querySelector('.hamburger');
+  const menu=document.getElementById('nav-menu-certs');
+  btn?.addEventListener('click',()=>{const isOpen=menu.classList.toggle('is-open');btn.setAttribute('aria-expanded',String(isOpen));});
+</script>
+</body>
+</html>
+
+/* ===== NEXT FILE: style.css ===== */
+/* Minimal external stylesheet to avoid 404 and provide base styles if inline CSS is removed. */
+:root{--bg:#0b0f14;--card:#111825;--text:#e6edf3;--muted:#9fb3c8;--brand:#4fb3ff;--accent:#a78bfa;--shadow:0 10px 30px rgba(0,0,0,.35);--radius:16px;--maxw:1100px}
+html,body{background:var(--bg);color:var(--text)}
+a{color:var(--brand)}
+.navbar{border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-link{border-radius:999px}
+.nav-link[aria-current="page"]{background:rgba(79,179,255,.12);outline:1px solid rgba(79,179,255,.35)}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);box-shadow:var(--shadow)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem .85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));color:var(--text);text-decoration:none}
+
+
+<!-- ===== DUPLICATE SITE FOR /docs DEPLOYMENTS ===== -->
+<!-- If your GitHub Pages or Replit serves from /docs, copy these files into a /docs folder. -->
+
+<!-- docs/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yves‑Claude Zamor — Cybersecurity Portfolio</title>
+  <meta name="description" content="Portfolio of Yves‑Claude Zamor — aspiring SOC Analyst. Hands‑on cybersecurity labs, projects, and certifications." />
+  <link rel="stylesheet" href="style.css" />
+  <style>:root{--bg:#0b0f14;--card:#111825;--text:#e6edf3;--muted:#9fb3c8;--brand:#4fb3ff;--accent:#a78bfa;--shadow:0 10px 30px rgba(0,0,0,.35);--radius:16px;--maxw:1100px}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto}.container{max-width:var(--maxw);margin:0 auto;padding:0 1rem}a{color:var(--brand)}header.navbar{position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background:rgba(11,15,20,.7);border-bottom:1px solid rgba(255,255,255,.06)}.nav-container{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.75rem 1rem}.nav-menu{list-style:none;display:flex;gap:.75rem;margin:0;padding:0}.nav-link{display:inline-flex;padding:.5rem .75rem;border-radius:999px}.nav-link[aria-current="page"]{background:rgba(79,179,255,.12);outline:1px solid rgba(79,179,255,.35)}.hamburger{display:none;background:transparent;border:0;padding:.5rem;border-radius:8px}.hamburger span{display:block;width:22px;height:2px;background:var(--text);margin:5px 0}@media(max-width:640px){.nav-menu{display:none}.hamburger{display:inline-block}.nav-menu.is-open{display:flex;flex-direction:column}}.hero{padding:3rem 0 2rem}.hero-name{margin:0}.muted{color:var(--muted)}.grid{display:grid;gap:1rem}.grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:900px){.grid.cols-3{grid-template-columns:repeat(2,1fr)}}@media(max-width:640px){.grid.cols-3{grid-template-columns:1fr}}.card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:1rem;box-shadow:var(--shadow)}</style>
+</head>
+<body>
+<header class="navbar">
+  <nav class="nav-container" aria-label="Primary navigation">
+    <div class="nav-brand"><h1>Yves‑Claude Zamor</h1></div>
+    <ul class="nav-menu" id="nav-menu-docs-index">
+      <li><a href="index.html" class="nav-link" aria-current="page">Home</a></li>
+      <li><a href="resume.html" class="nav-link">Resume</a></li>
+      <li><a href="projects.html" class="nav-link">Projects</a></li>
+      <li><a href="certifications.html" class="nav-link">Certifications</a></li>
+      <li><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener" class="nav-link">Labs (GitHub)</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu-docs-index" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+<main class="container">
+  <section class="hero">
+    <h1 class="hero-name">Yves‑Claude Zamor</h1>
+    <p class="muted">Aspiring SOC / Cybersecurity Analyst</p>
+    <p class="muted">Associate of Science (Apr 2025, GPA 3.89) — Bachelor’s in progress (Mar 2026)</p>
+    <p>
+      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Download Resume (PDF)</a>
+      <a class="btn" href="https://github.com/yveszamor21" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="projects.html">View Projects</a>
+      <a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View All Labs on GitHub →</a>
+    </p>
+  </section>
+  <section>
+    <h2>Cybersecurity Labs</h2>
+    <div class="grid cols-3">
+      <div class="card"><h3><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">Lab 1 — Network Security Fundamentals</a></h3></div>
+      <div class="card"><h3><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">Lab 2 — Vulnerability Assessment</a></h3></div>
+      <div class="card"><h3><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">Lab 3 — Incident Response Planning</a></h3></div>
+      <div class="card"><h3><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">Lab 4 — Digital Forensics Investigation</a></h3></div>
+      <div class="card"><h3><a href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">Lab 5 — Penetration Testing Basics</a></h3></div>
+    </div>
+  </section>
+</main>
+<footer class="container"><p>© <span id="y"></span> Yves‑Claude Zamor</p></footer>
+<script>
+  document.getElementById('y').textContent=new Date().getFullYear();
+  const btn=document.querySelector('.hamburger');const menu=document.getElementById('nav-menu-docs-index');
+  btn?.addEventListener('click',()=>{const isOpen=menu.classList.toggle('is-open');btn.setAttribute('aria-expanded',String(isOpen));});
+</script>
+</body>
+</html>
+
+<!-- docs/projects.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Projects — YCZ</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="navbar"><nav class="nav-container"><div class="nav-brand"><h1>Yves‑Claude Zamor</h1></div><ul class="nav-menu" id="nav-menu-docs-proj"><li><a href="index.html" class="nav-link">Home</a></li><li><a href="resume.html" class="nav-link">Resume</a></li><li><a href="projects.html" class="nav-link" aria-current="page">Projects</a></li><li><a href="certifications.html" class="nav-link">Certifications</a></li><li><a class="nav-link" target="_blank" rel="noopener" href="https://github.com/yveszamor21/cyber-labs-portfolio">Labs (GitHub)</a></li></ul><button class="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu-docs-proj" aria-expanded="false"><span></span><span></span><span></span></button></nav></header>
+<main class="container"><h1>Projects & Labs</h1>
+  <div class="grid cols-3">
+    <article class="card"><h3>BIND9 Local DNS Resolver</h3><p><a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View on GitHub →</a></p></article>
+    <article class="card"><h3>dnsmasq Forwarder</h3><p><a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View on GitHub →</a></p></article>
+    <article class="card"><h3>Pi‑hole Ad‑Blocking DNS</h3><p><a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View on GitHub →</a></p></article>
+    <article class="card"><h3>Wireshark DNS Analysis</h3><p><a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View on GitHub →</a></p></article>
+    <article class="card"><h3>Security Onion DNS Alerting</h3><p><a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View on GitHub →</a></p></article>
+    <article class="card"><h3>Nmap Host Discovery</h3><p><a class="btn" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener">View on GitHub →</a></p></article>
+  </div>
+</main>
+<footer class="container"><p>© <span id="yp"></span> Yves‑Claude Zamor</p></footer>
+<script>document.getElementById('yp').textContent=new Date().getFullYear();const b=document.querySelector('.hamburger');const m=document.getElementById('nav-menu-docs-proj');b?.addEventListener('click',()=>{const o=m.classList.toggle('is-open');b.setAttribute('aria-expanded',String(o));});</script>
+</body></html>
+
+<!-- docs/resume.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Resume — YCZ</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="navbar"><nav class="nav-container"><div class="nav-brand"><h1>Yves‑Claude Zamor</h1></div><ul class="nav-menu" id="nav-menu-docs-resume"><li><a href="index.html" class="nav-link">Home</a></li><li><a href="resume.html" class="nav-link" aria-current="page">Resume</a></li><li><a href="projects.html" class="nav-link">Projects</a></li><li><a href="certifications.html" class="nav-link">Certifications</a></li><li><a class="nav-link" target="_blank" rel="noopener" href="https://github.com/yveszamor21/cyber-labs-portfolio">Labs (GitHub)</a></li></ul><button class="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu-docs-resume" aria-expanded="false"><span></span><span></span><span></span></button></nav></header>
+<main class="container">
+  <h1>Resume</h1>
+  <p><a class="btn" href="resume.pdf" target="_blank" rel="noopener">Download Resume (PDF)</a></p>
+  <div class="card"><h2>Education</h2><p>DeVry University — A.S. Cybersecurity & Networking (Apr 2025, GPA 3.89)</p><p>Bachelor’s in progress — Expected Mar 2026</p></div>
+  <div class="card"><h2>Skills</h2><ul><li>Security Onion, Zeek, Wireshark</li><li>DNS (BIND9, dnsmasq, Pi‑hole)</li><li>Nmap, DVWA (lab), Linux</li></ul></div>
+  <div class="card"><h2>Academic Projects</h2><ul><li>DNS Resolver Lab</li><li>Security Onion DNS Alerting</li><li>Wireshark PCAP Analysis</li><li>Nmap Recon</li></ul><p><a class="btn" href="projects.html">See details →</a></p></div>
+</main>
+<footer class="container"><p>© <span id="yr"></span> Yves‑Claude Zamor</p></footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();const b=document.querySelector('.hamburger');const m=document.getElementById('nav-menu-docs-resume');b?.addEventListener('click',()=>{const o=m.classList.toggle('is-open');b.setAttribute('aria-expanded',String(o));});</script>
+</body></html>
+
+<!-- docs/certifications.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Certifications — YCZ</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="navbar"><nav class="nav-container"><div class="nav-brand"><h1>Yves‑Claude Zamor</h1></div><ul class="nav-menu" id="nav-menu-docs-certs"><li><a href="index.html" class="nav-link">Home</a></li><li><a href="resume.html" class="nav-link">Resume</a></li><li><a href="projects.html" class="nav-link">Projects</a></li><li><a href="certifications.html" class="nav-link" aria-current="page">Certifications</a></li><li><a class="nav-link" target="_blank" rel="noopener" href="https://github.com/yveszamor21/cyber-labs-portfolio">Labs (GitHub)</a></li></ul><button class="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu-docs-certs" aria-expanded="false"><span></span><span></span><span></span></button></nav></header>
+<main class="container">
+  <h1>Certifications & Credentials</h1>
+  <div class="card"><h2>Academic</h2><ul><li><strong>A.S. Cybersecurity & Networking</strong> — DeVry University — Apr 2025 — GPA 3.89</li><li><strong>Bachelor’s</strong> — in progress — ETA Mar 2026</li></ul></div>
+  <div class="card"><h2>Industry</h2><ul><li>CompTIA Security+ — studying (set your target month)</li></ul><p class="muted">Only listing completed or in‑progress items.</p></div>
+</main>
+<footer class="container"><p>© <span id="yc"></span> Yves‑Claude Zamor</p></footer>
+<script>document.getElementById('yc').textContent=new Date().getFullYear();const b=document.querySelector('.hamburger');const m=document.getElementById('nav-menu-docs-certs');b?.addEventListener('click',()=>{const o=m.classList.toggle('is-open');b.setAttribute('aria-expanded',String(o));});</script>
+</body></html>
+
+<!-- docs/style.css -->
+:root{--bg:#0b0f14;--card:#111825;--text:#e6edf3;--muted:#9fb3c8;--brand:#4fb3ff;--accent:#a78bfa;--shadow:0 10px 30px rgba(0,0,0,.35);--radius:16px;--maxw:1100px}
+html,body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto;margin:0}
+a{color:var(--brand)}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 1rem}
+.navbar{border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-menu{list-style:none;display:flex;gap:.75rem;margin:0;padding:0}
+.nav-link{border-radius:999px;padding:.5rem .75rem;display:inline-flex}
+.nav-link[aria-current="page"]{background:rgba(79,179,255,.12);outline:1px solid rgba(79,179,255,.35)}
+@media(max-width:640px){.nav-menu{display:none}.nav-menu.is-open{display:flex;flex-direction:column}}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem;margin:.5rem 0}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem .85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));color:var(--text);text-decoration:none}
