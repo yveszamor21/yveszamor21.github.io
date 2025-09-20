@@ -14,20 +14,20 @@
   
   <style>
     :root {
-      --bg: #0b0f14;
-      --bg-secondary: #0d1117;
-      --card: #161b22;
-      --card-hover: #1c2128;
-      --text: #e6edf3;
-      --text-secondary: #8b949e;
-      --muted: #6e7681;
-      --brand: #58a6ff;
-      --brand-hover: #1f6feb;
-      --accent: #a5a5ff;
+      --bg: #111;
+      --bg-secondary: #0d0d0d;
+      --card: #222;
+      --card-hover: #333;
+      --text: #fff;
+      --text-secondary: #ccc;
+      --muted: #999;
+      --brand: #ff8c00;
+      --brand-hover: #e67a00;
+      --accent: #ffa500;
       --success: #2ea043;
       --warning: #d29922;
       --danger: #f85149;
-      --border: #30363d;
+      --border: #444;
       --shadow: 0 10px 30px rgba(0,0,0,.4);
       --shadow-lg: 0 25px 50px -12px rgba(0,0,0,.5);
       --radius: 8px;
@@ -47,9 +47,9 @@
     }
 
     body { 
-      background: linear-gradient(135deg, var(--bg) 0%, var(--bg-secondary) 100%);
+      background: var(--bg);
       color: var(--text); 
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+      font-family: Arial, sans-serif;
       line-height: 1.6;
       min-height: 100vh;
     }
@@ -127,7 +127,7 @@
       display: flex;
       align-items: center;
       padding: 5rem 0 2rem;
-      background: radial-gradient(ellipse at center, rgba(88, 166, 255, 0.1) 0%, transparent 50%);
+      background: url('assets/hero.jpg') no-repeat center center/cover;
       position: relative;
       overflow: hidden;
     }
@@ -139,8 +139,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.1" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
-      opacity: 0.3;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
     }
 
     .hero-content {
@@ -151,6 +151,22 @@
       margin: 0 auto;
     }
 
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-bottom: 2rem;
+      object-fit: cover;
+      border: 4px solid var(--brand);
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition);
+    }
+
+    .profile-img:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+    }
+
     .hero h1 {
       font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 800;
@@ -159,6 +175,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
 
     .hero .subtitle {
@@ -279,8 +296,9 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 1rem;
-      color: white;
+      color: #000;
       font-size: 1.5rem;
+      font-weight: bold;
     }
 
     .card h3 {
@@ -458,6 +476,7 @@
   <section id="home" class="hero">
     <div class="container">
       <div class="hero-content fade-in">
+        <img src="profile/profile.jpg" alt="Yves-Claude Zamor" class="profile-img">
         <h1>Yves-Claude Zamor</h1>
         <p class="subtitle">Aspiring SOC Analyst & Cybersecurity Professional</p>
         <p class="description">
@@ -746,4 +765,3 @@
   </script>
 </body>
 </html>
- 
