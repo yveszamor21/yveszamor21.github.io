@@ -10,30 +10,740 @@
   <meta property="og:description" content="Hands-on cybersecurity labs, projects, and certifications.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
-  <!-- Optional canonical: set to your deployed URL -->
-  <!-- <link rel="canonical" href="https://yveszamor21.github.io/" /> -->
-  <!-- Your external stylesheet (keep if you already use it) -->
-  <link rel="stylesheet" href="style.css">
-  <!-- Inline critical styles to ensure a professional look even without style.css -->
+  <link rel="canonical" href="https://cyberyves.github.io/" />
+  
   <style>
     :root {
       --bg: #0b0f14;
-      --card: #111825;
+      --bg-secondary: #0d1117;
+      --card: #161b22;
+      --card-hover: #1c2128;
       --text: #e6edf3;
-      --muted: #9fb3c8;
-      --brand: #4fb3ff;
-      --accent: #a78bfa;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 16px;
-      --maxw: 1100px;
+      --text-secondary: #8b949e;
+      --muted: #6e7681;
+      --brand: #58a6ff;
+      --brand-hover: #1f6feb;
+      --accent: #a5a5ff;
+      --success: #2ea043;
+      --warning: #d29922;
+      --danger: #f85149;
+      --border: #30363d;
+      --shadow: 0 10px 30px rgba(0,0,0,.4);
+      --shadow-lg: 0 25px 50px -12px rgba(0,0,0,.5);
+      --radius: 8px;
+      --radius-lg: 12px;
+      --maxw: 1200px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
-    a { color: var(--brand); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 1rem; }
+
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+
+    html { 
+      scroll-behavior: smooth; 
+    }
+
+    body { 
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg-secondary) 100%);
+      color: var(--text); 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container { 
+      width: 100%; 
+      max-width: var(--maxw); 
+      margin: 0 auto; 
+      padding: 0 1.5rem; 
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(11, 15, 20, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--brand);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--brand);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--brand);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 5rem 0 2rem;
+      background: radial-gradient(ellipse at center, rgba(88, 166, 255, 0.1) 0%, transparent 50%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.1" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--text) 0%, var(--brand) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .hero .description {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--brand);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      background: var(--brand-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--brand);
+      color: var(--brand);
+      transform: translateY(-2px);
+    }
+
+    /* Sections */
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .section-description {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      background: var(--card-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--brand);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .skill-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .skill-item:hover {
+      background: var(--card-hover);
+      border-color: var(--brand);
+    }
+
+    .skill-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: var(--border);
+      border-radius: 50%;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background: var(--brand);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+    }
+
+    .mobile-menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--text);
+      transition: var(--transition);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .hero {
+        padding: 4rem 0 2rem;
+        min-height: 80vh;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .section {
+        padding: 3rem 0;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Loading state */
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
   </style>
 </head>
+
 <body>
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <a href="#home" class="logo">YC Zamor</a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content fade-in">
+        <h1>Yves-Claude Zamor</h1>
+        <p class="subtitle">Aspiring SOC Analyst & Cybersecurity Professional</p>
+        <p class="description">
+          Passionate about protecting digital assets and securing infrastructure. 
+          Currently building expertise through hands-on labs, certifications, and real-world projects.
+        </p>
+        <div class="cta-buttons">
+          <a href="#projects" class="btn btn-primary">
+            <span>🚀</span> View Projects
+          </a>
+          <a href="resume.html" class="btn btn-secondary">
+            <span>📄</span> Resume
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-description">
+          Dedicated cybersecurity enthusiast with a focus on threat detection, incident response, and security operations.
+        </p>
+      </div>
+      
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <h3>Security Operations</h3>
+          <p>Experience with SIEM tools, log analysis, and threat hunting techniques to identify and mitigate security incidents.</p>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">🔍</div>
+          <h3>Threat Analysis</h3>
+          <p>Skilled in analyzing malware, investigating security breaches, and understanding attack vectors and TTPs.</p>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Incident Response</h3>
+          <p>Trained in incident response procedures, digital forensics, and rapid containment of security threats.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Projects & Labs</h2>
+        <p class="section-description">
+          Hands-on cybersecurity projects demonstrating practical skills and real-world applications.
+        </p>
+      </div>
+      
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">🖥️</div>
+          <h3>Home SOC Lab</h3>
+          <p>Built a comprehensive home lab environment with virtual machines, network monitoring tools, and SIEM implementation for hands-on security operations practice.</p>
+          <a href="projects.html" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">🔒</div>
+          <h3>Vulnerability Assessment</h3>
+          <p>Conducted comprehensive vulnerability assessments using industry-standard tools like Nessus, OpenVAS, and custom scripts.</p>
+          <a href="projects.html" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>SIEM Dashboard</h3>
+          <p>Created custom dashboards and correlation rules for security event monitoring and automated threat detection.</p>
+          <a href="projects.html" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Technical Skills</h2>
+        <p class="section-description">
+          Core competencies in cybersecurity tools, technologies, and methodologies.
+        </p>
+      </div>
+      
+      <div class="skills-grid">
+        <div class="skill-item">
+          <div class="skill-icon">🛡️</div>
+          <h4>SIEM/SOAR</h4>
+        </div>
+        
+        <div class="skill-item">
+          <div class="skill-icon">🔍</div>
+          <h4>Threat Hunting</h4>
+        </div>
+        
+        <div class="skill-item">
+          <div class="skill-icon">🖥️</div>
+          <h4>Network Security</h4>
+        </div>
+        
+        <div class="skill-item">
+          <div class="skill-icon">⚡</div>
+          <h4>Incident Response</h4>
+        </div>
+        
+        <div class="skill-item">
+          <div class="skill-icon">📊</div>
+          <h4>Risk Assessment</h4>
+        </div>
+        
+        <div class="skill-item">
+          <div class="skill-icon">🔒</div>
+          <h4>Penetration Testing</h4>
+        </div>
+        
+        <div class="skill-item">
+          <div class="skill-icon">🐧</div>
+          <h4>Linux/Windows</h4>
+        </div>
+        
+        <div class="skill-item">
+          <div class="skill-icon">💻</div>
+          <h4>Python/PowerShell</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section id="certifications" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Certifications</h2>
+        <p class="section-description">
+          Industry-recognized certifications validating cybersecurity expertise.
+        </p>
+      </div>
+      
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">🏆</div>
+          <h3>Current Certifications</h3>
+          <p>View my completed cybersecurity certifications and professional credentials.</p>
+          <a href="certifications.html" class="btn btn-primary" style="margin-top: 1rem;">View Certificates</a>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <h3>In Progress</h3>
+          <p>Currently pursuing additional certifications to expand cybersecurity knowledge and expertise.</p>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>Future Goals</h3>
+          <p>Planning to obtain CISSP, CEH, and other advanced cybersecurity certifications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-description">
+          Let's connect and discuss cybersecurity opportunities, collaborations, or just network!
+        </p>
+      </div>
+      
+      <div class="cards-grid" style="max-width: 800px; margin: 0 auto;">
+        <div class="card">
+          <div class="card-icon">📧</div>
+          <h3>Email</h3>
+          <p>Ready to discuss opportunities or collaborate on cybersecurity projects.</p>
+          <a href="mailto:yves.zamor@example.com" class="btn btn-primary" style="margin-top: 1rem;">Send Email</a>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">💼</div>
+          <h3>LinkedIn</h3>
+          <p>Connect with me professionally and view my career journey.</p>
+          <a href="#" class="btn btn-primary" style="margin-top: 1rem;">Connect</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="social-links">
+        <a href="#" class="social-link" title="LinkedIn">💼</a>
+        <a href="#" class="social-link" title="GitHub">🐱</a>
+        <a href="#" class="social-link" title="Email">📧</a>
+      </div>
+      <p style="color: var(--text-secondary);">
+        © 2025 Yves-Claude Zamor. Built with passion for cybersecurity.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add fade-in animation on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        }
+      });
+    });
+
+    // Observe all cards and sections
+    document.querySelectorAll('.card, .section-header').forEach((el) => {
+      observer.observe(el);
+    });
+
+    // Mobile menu toggle (basic implementation)
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', () => {
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+      });
+    }
+
+    // Add active state to navigation
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-links a');
+      
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Add loading states for buttons
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        if (this.href && !this.href.startsWith('#')) {
+          this.classList.add('loading');
+          setTimeout(() => {
+            this.classList.remove('loading');
+          }, 1000);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
+ 
