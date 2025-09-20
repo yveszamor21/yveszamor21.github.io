@@ -1,0 +1,76 @@
+/* CSS code will be pasted here */body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #111;
+  color: #fff;
+}
+
+.hero {
+  background: url('assets/hero.jpg') no-repeat center center/cover;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+  border: 4px solid orange;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: darkorange;
+  color: #000;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
+.features, .projects, .contact {
+  padding: 50px 20px;
+  background: #222;
+  margin: 20px 0;
+}
+
+.features h2, .projects h2, .contact h2 {
+  color: orange;
+}
+
+.project-list a {
+  display: block;
+  padding: 10px;
+  margin: 10px 0;
+  background: #333;
+  color: orange;
+  text-decoration: none;
+  border-left: 5px solid darkorange;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background: orange;
+  border: none;
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #000;
+  color: #999;
+}
