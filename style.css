@@ -1,7 +1,42 @@
-/* CSS code will be pasted here */body {
+/* CSS code will be pasted here */
+
+/* ===== STICKY NAVIGATION BAR CSS ===== */
+/* Navigation bar stays at the top when scrolling */
+nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: #000;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  padding: 15px 0;
+}
+
+/* ===== MODERN HOVER EFFECTS FOR NAVIGATION LINKS ===== */
+/* Navigation links with smooth transitions and hover effects */
+nav a {
+  color: orange;
+  text-decoration: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  display: inline-block;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  color: white;
+  background: #333;
+  border-radius: 8px;
+}
+
+/* ===== BODY PADDING TO PREVENT NAVBAR OVERLAP ===== */
+/* Add padding-top to body to prevent content from being hidden under fixed navbar */
+body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  padding-top: 60px; /* Prevents content overlap with sticky navbar */
   background: #111;
   color: #fff;
 }
