@@ -1,82 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Yves-Claude Zamor | Projects & Work Samples</title>
-  <style>
-    /* Simple styling to match index.html and resume.html */
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    nav { background-color: #003366; padding: 10px; }
-    nav a { color: white; margin-right: 10px; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    .container { max-width: 600px; margin: 20px auto; }
-    .project { margin-bottom: 30px; }
-    .project a { color: #003366; font-weight: bold; text-decoration: none; }
-    .project a:hover { text-decoration: underline; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects &amp; Labs | Yves-Claude Zamor</title>
+  <meta name="description" content="Public cybersecurity lab code and documentation by Yves-Claude Zamor: DNS security, authentication controls, monitoring, and Python.">
+  <meta name="author" content="Yves-Claude Zamor">
+  <meta property="og:title" content="Projects &amp; Labs | Yves-Claude Zamor">
+  <meta property="og:description" content="Public cybersecurity lab code and documentation by Yves-Claude Zamor: DNS security, authentication controls, monitoring, and Python.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yveszamor21.github.io/projects.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#0c1729">
+  <link rel="canonical" href="https://yveszamor21.github.io/projects.html">
+  <link rel="stylesheet" href="style.css">
+  <script src="site.js" defer></script>
 </head>
 <body>
-
-  <!-- NAVIGATION MENU (must match your other pages exactly) -->
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="resume.html">Resume</a>
-    <a href="projects.html">Projects</a>
-    <a href="certifications.html">Certifications</a>  <!-- If you made certifications.html -->
-  </nav>
-
-  <!-- MAIN CONTENT -->
-  <div class="container">
-    <h1>Projects & Work Samples</h1>
-
-    <!-- PROJECT #1 -->
-    <div class="project">
-      <h2>Python Vulnerability Scanner</h2>
-      <p>
-        Developed a Python tool that parses the National Vulnerability Database (NVD) JSON feed 
-        and matches known CVEs against installed packages. Generates a prioritized CSV report 
-        for remediation.
-      </p>
-      <p>
-        <a href="https://github.com/yveszamor21/python-vuln-scanner" target="_blank">
-          View code on GitHub
-        </a>
-      </p>
-    </div>
-
-    <!-- PROJECT #2 -->
-    <div class="project">
-      <h2>VirtualBox + Kali Linux Home Lab</h2>
-      <p>
-        Built a multi-VM Kali Linux environment on a Mac Mini 2008 using VirtualBox. Documented 
-        each installation step (host OS, VirtualBox settings, VM configuration, networking) 
-        in a 12-page PDF guide with screenshots.
-      </p>
-      <p>
-        <span style="color: #999;">Lab Guide (Coming Soon)</span>
-          Download Lab Guide (PDF)
-        </a>
-      </p>
-    </div>
-
-    <!-- PROJECT #3 -->
-    <div class="project">
-      <h2>Network Sniffing with Wireshark</h2>
-      <p>
-        Captured and analyzed live network traffic on a SOHO router. Filtered for HTTP, DNS, and 
-        suspicious TCP sessions. Produced a 5-page analysis report highlighting potential 
-        security issues and suggested mitigations.
-      </p>
-      <p>
-        <span style="color: #999;">Report (Coming Soon)</span>
-          Download Report (PDF)
-        </a>
-      </p>
-    </div>
-
-    <!-- (Optional) Add more project blocks the same way -->
-
-  </div>
-
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="container nav" aria-label="Main navigation">
+      <a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true">YZ</span><span>Yves-Claude Zamor</span></a>
+      <button class="menu-toggle" type="button" aria-controls="nav-links" aria-expanded="false" hidden>Menu</button>
+      <ul class="nav-links" id="nav-links"><li><a href="index.html">Home</a></li><li><a href="projects.html" aria-current="page">Projects</a></li><li><a href="resume.html">Résumé</a></li><li><a href="certifications.html">Education & Badges</a></li><li><a href="index.html#contact">Contact</a></li></ul>
+    </nav>
+  </header>
+  <main id="main"><section class="page-intro"><div class="container"><p class="eyebrow">Hands-on learning</p><h1>Projects & Labs</h1><p class="lead">Public code and documentation covering DNS security, authentication controls, monitoring, and Python.</p><p>These are educational lab projects. Each entry links to the available materials so you can review the implementation and scope.</p></div></section><section class="section"><div class="container"><article class="project-detail" id="dns-security"><div><p class="eyebrow">Network security</p><h2>DNS Security Lab</h2><p class="tools">BIND9 · Docker · dig · Wireshark</p></div><div><p class="lead">A containerized DNS lab with DNSSEC validation, QNAME minimization, and query logging exercises.</p><dl><dt>Purpose</dt><dd>Understand DNS behavior and the controls used to protect name resolution.</dd><dt>Published work</dt><dd>Documented resolver setup, DNSSEC checks, cache behavior, and query log analysis.</dd><dt>Learning focus</dt><dd>Connect DNS responses and logs to troubleshooting and security monitoring.</dd></dl><div class="project-links"><a class="button secondary" href="https://github.com/yveszamor21/cyber-labs-portfolio/blob/main/docs/labs/dns-bind9.md" target="_blank" rel="noopener noreferrer">Read lab guide</a><a class="button secondary" href="https://github.com/yveszamor21/cyber-labs-portfolio/tree/main/labs-src/bind9" target="_blank" rel="noopener noreferrer">View configuration</a><a class="button secondary" href="https://github.com/yveszamor21/cyber-labs-portfolio/blob/main/assets/diagrams/homelab-dns-arch.drawio.svg" target="_blank" rel="noopener noreferrer">View architecture</a></div></div></article><article class="project-detail" id="authentication-security"><div><p class="eyebrow">Application security</p><h2>Authentication & Audit Logging Lab</h2><p class="tools">Python · FastAPI · PostgreSQL · Redis</p></div><div><p class="lead">A local SaaS lab exploring authentication, access control, rate limiting, and security audit events.</p><dl><dt>Purpose</dt><dd>Explore how application controls and authentication logs support defensive investigations.</dd><dt>Published work</dt><dd>The repository includes JWT authentication, role-based access, token revocation, audit logging, and a failed-login test.</dd><dt>Learning focus</dt><dd>Follow authentication events from an API request to audit records and detection opportunities.</dd></dl><div class="project-links"><a class="button secondary" href="https://github.com/yveszamor21/cyber-labs-portfolio/blob/main/labs-src/saas-security/README.md" target="_blank" rel="noopener noreferrer">Read lab guide</a><a class="button secondary" href="https://github.com/yveszamor21/cyber-labs-portfolio/tree/main/labs-src/saas-security/app" target="_blank" rel="noopener noreferrer">View source code</a><a class="button secondary" href="https://github.com/yveszamor21/cyber-labs-portfolio/tree/main/labs-src/saas-security/tests" target="_blank" rel="noopener noreferrer">Review security tests</a></div></div></article><article class="project-detail" id="security-monitoring"><div><p class="eyebrow">Security operations</p><h2>Security Monitoring & Detection Plan</h2><p class="tools">Authentication logs · Splunk concepts · Detection rules</p></div><div><p class="lead">A documented monitoring plan for failed logins, brute-force patterns, and authentication anomalies.</p><dl><dt>Purpose</dt><dd>Translate authentication activity into practical triage and alerting criteria.</dd><dt>Published work</dt><dd>Defined failed-login thresholds, correlation patterns, field normalization, and SIEM integration guidance.</dd><dt>Learning focus</dt><dd>Explain what an alert should contain and how an analyst could investigate it.</dd></dl><div class="project-links"><a class="button secondary" href="https://github.com/yveszamor21/cyber-labs-portfolio/blob/main/docs/MONITORING.md" target="_blank" rel="noopener noreferrer">Read detection plan</a><a class="button secondary" href="https://github.com/yveszamor21/cyber-labs-portfolio/blob/main/labs-src/saas-security/tests/test_failed_login_audit.py" target="_blank" rel="noopener noreferrer">View related audit test</a></div></div></article><article class="project-detail" id="malware-ml"><div><p class="eyebrow">Python learning project</p><h2>Malware Detection with Machine Learning</h2><p class="tools">Python · scikit-learn · Random Forest · Comet.ml</p></div><div><p class="lead">An educational repository with preprocessing, model training, prediction code, and experiment tracking.</p><dl><dt>Purpose</dt><dd>Learn how machine learning can support malware classification and how models are evaluated.</dd><dt>Published work</dt><dd>Published Python training and prediction code using Random Forest and classification metrics.</dd><dt>Learning focus</dt><dd>Understand precision, recall, false positives, and the limits of a learning model.</dd></dl><div class="project-links"><a class="button secondary" href="https://github.com/yveszamor21/MALWARE-DETECTION-ML" target="_blank" rel="noopener noreferrer">View repository</a><a class="button secondary" href="https://github.com/yveszamor21/MALWARE-DETECTION-ML/blob/main/src/train.py" target="_blank" rel="noopener noreferrer">Review training code</a></div></div></article><div class="end-note"><p>For the full collection of configurations and guides, explore my lab repository.</p><a class="text-link" href="https://github.com/yveszamor21/cyber-labs-portfolio" target="_blank" rel="noopener noreferrer">Browse Cyber Labs Portfolio →</a></div></div></section></main>
+  <footer class="site-footer"><div class="container footer-inner"><p>© 2026 Yves-Claude Zamor<br><span class="muted">Long Island, New York</span></p><div class="footer-links"><a class="text-link" href="https://github.com/yveszamor21" target="_blank" rel="noopener noreferrer">GitHub</a><a class="text-link" href="https://www.linkedin.com/in/yves-claude-zamor/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="text-link" href="mailto:yveszamor@gmail.com">Email</a></div></div></footer>
 </body>
 </html>
