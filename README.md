@@ -1,6 +1,6 @@
 # Yves-Claude Zamor | Cybersecurity & IT Portfolio
 
-**B.S. Cybersecurity and Networking, DeVry University — Summa Cum Laude (August 2026)**  
+**B.S. Cybersecurity and Networking, DeVry University — Summa Cum Laude (August 29, 2026)**  
 Aspiring SOC Analyst • Junior Cybersecurity Analyst • IT Support / Systems Support  
 [Portfolio website](https://yveszamor21.github.io/) · [GitHub](https://github.com/yveszamor21) · [LinkedIn](https://www.linkedin.com/in/yves-claude-zamor/)
 
@@ -36,9 +36,9 @@ I am a cybersecurity and networking graduate building practical skills through s
 
 ## Education
 **DeVry University** — Bachelor of Science, Cybersecurity and Networking  
-**Graduated August 2026 · Summa Cum Laude**
+**Graduated August 29, 2026 · Summa Cum Laude**
 
-Degree and honors are stated from my education records; diploma or transcript image is not published here. Academic distinction is not a professional certification.
+Degree title, graduation date, and honors are confirmed against the diploma provided privately. The diploma image is not published here. Academic distinction is not a professional certification.
 
 ## Certifications
 **CompTIA Security+ — preparing for exam (not yet certified).**
