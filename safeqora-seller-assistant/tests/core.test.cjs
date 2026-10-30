@@ -1,0 +1,13 @@
+const {test}=require('node:test');const assert=require('node:assert/strict');
+let c;try{c=require('../core.js')}catch{};
+test('core available',()=>assert.ok(c));
+for(const code of ['036000291452','4006381333931','96385074','04252614'])test('accept barcode '+code,()=>assert.ok(c?.barcode(code)));
+for(const code of ['036000291453','123','abc','4006381333932'])test('reject barcode '+code,()=>assert.equal(c?.barcode(code),false));
+const input={sale:30,paid:10,tax:1,quantity:2,discount:2,transport:4,extra:0,rate:15,minimum:0,shipping:4,inbound:3,storage:1,returns:0,closing:0,prep:0,other:0};
+test('batch purchase allocation and all fees',()=>{const r=c?.calculate(input);assert.equal(r?.cost,12);assert.equal(r?.profit,5.5);assert.equal(r?.totalProfit,11);assert.equal(r?.investment,24);assert.equal(r?.breakEven,23.53)});
+test('minimum referral fee break-even',()=>{const r=c?.calculate({...input,paid:0,tax:0,discount:0,transport:0,shipping:0,inbound:0,storage:0,minimum:.3});assert.equal(r?.breakEven,.3)});
+test('reject invalid and excessive rates',()=>{for(const field of ['sale','paid','shipping','inbound','quantity'])assert.throws(()=>c.calculate({...input,[field]:-1}));assert.throws(()=>c.calculate({...input,rate:100}));assert.throws(()=>c.calculate({...input,quantity:1.5}));assert.throws(()=>c.calculate({...input,shipping:Infinity}))});
+test('recommendation never BUY with missing verification',()=>{assert.equal(c?.recommend({profit:10,roi:100},{match:true,fees:false,eligibility:'verified'},5,30),'REVIEW');assert.equal(c?.recommend({profit:10,roi:100},{match:true,fees:true,eligibility:'verified'},5,30),'BUY');assert.equal(c?.recommend({profit:-1,roi:-10},{},5,30),'AVOID');assert.equal(c?.recommend({profit:10,roi:100},{eligibility:'blocked'},5,30),'AVOID')});
+test('CSV round-trip quotes multiline and leading zero barcode',()=>{const data=[{barcode:'036000291452',name:'A, "B"\nC',profit:5}];assert.deepEqual(c?.parseCSV(c?.csv(data,['barcode','name','profit'])),[{barcode:'036000291452',name:'A, "B"\nC',profit:'5'}])});
+test('CSV rejects duplicate headers and broken quotes',()=>{assert.throws(()=>c.parseCSV('barcode,barcode\n1,2'));assert.throws(()=>c.parseCSV('barcode,name\n1,"bad'))});
+test('Walmart link rejects deceptive domains and scripts',()=>{assert.equal(c?.walmartURL('https://www.walmart.com/ip/test/123'),true);for(const u of ['javascript:alert(1)','https://walmart.com.evil.com/ip/a','https://user@walmart.com/ip/a','http://walmart.com/ip/a'])assert.equal(c?.walmartURL(u),false)});
